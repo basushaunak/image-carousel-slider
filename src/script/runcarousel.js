@@ -1,31 +1,69 @@
 function runCarousel() {
   const carousel = document.querySelector(".carousel");
+  const slidesContainer = document.querySelector(".slides-container");
+  const carouselNav = document.querySelector(".carousel-nav");
   const carouselButtonPrev = document.querySelector(".carousel-button--prev");
   const carouselButtonNext = document.querySelector(".carousel-button--next");
-  const slidesContainer = document.querySelector(".slides-container");
-  const slideList = document.querySelectorAll(".carousel-slide");
-  const carouselNav = document.querySelector(".carousel-nav");
-  const imageWidth = carousel.getBoundingClientRect().width;
+  let allSlidesTemp = document.querySelectorAll(".slide");
+  let firstSlide = allSlidesTemp[0].cloneNode(true);
+  let lastSlide = allSlidesTemp[allSlidesTemp.length - 1].cloneNode(true);
   let navBtn;
-  let currentSlide = 3;
-  let targetSlide = -1;
-  for (let i = 0; i < slideList.length; i++) {
-    slideList[i].style.left = imageWidth * i + "px";
-    navBtn = document.createElement("button");
-    navBtn.classList.add("carousel-nav-button");
-    carouselNav.appendChild(navBtn);
-    navBtn = null;
+  slidesContainer.prepend(lastSlide);
+  slidesContainer.append(firstSlide);
+  allSlidesTemp = null;
+  firstSlide = null;
+  lastSlide = null;
+  const allSlides = document.querySelectorAll(".slide");
+  const imageWidth = allSlides[0].getBoundingClientRect().width;
+  let activeSlide = 1;
+  let targetSlide = 1;
+
+  for (let i = 0; i < allSlides.length; i++) {
+    allSlides[i].style.left = imageWidth * i + "px";
+    if ((i === 0 || i === allSlides.length - 1)) {
+      continue;
+    }else{
+      navBtn = document.createElement("button");
+      navBtn.classList.add("carousel-nav-button");
+      carouselNav.appendChild(navBtn);
+    }
   }
-  const carouselNavButtons = document.querySelectorAll(".carousel-nav-button");
-  carouselNavButtons[currentSlide].classList.add("active-slide");
-  slideList[currentSlide].classList.add("active-slide");
+  const navButtons = document.querySelectorAll(".carousel-nav-button");
+  updateCarousel();
+  carouselButtonNext.addEventListener('click',()=>nextSlide());
+  carouselButtonPrev.addEventListener('click',()=>previousSlide());
 
-  // slideList[currentSlide].style.left = "0px";
-  
-  // slidesContainer.style.left = "-"+imageWidth+"px";
-  slidesContainer.style.left = imageWidth*currentSlide+"px";
-  console.log(slidesContainer.style.left);
+  function nextSlide(){
+    if(activeSlide<allSlides.length-1){
+      targetSlide = activeSlide+1;
+      updateCarousel();
+    }else{
+      targetSlide = allSlides.length-1;
+    }
+  }
+
+  function previousSlide(){
+    if(activeSlide>0){
+      targetSlide = activeSlide - 1;
+      updateCarousel();
+    }else{
+      targetSlide = 0;
+    }
+  }
+
+  function updateCarousel(){
+    slidesContainer.style.transform = "translateX(-" + (targetSlide*imageWidth)+"px)";
+    navButtons[activeSlide-1].classList.remove("active-slide");
+    navButtons[targetSlide-1].classList.add("active-slide");
+    activeSlide=targetSlide;
+    targetSlide = -1;
+    if(activeSlide === 0){
+      activeSlide = allSlides.length-1;
+      navButtons[activeSlide-1].classList.add("active-slide");
+    }else if(activeSlide === allSlides.length-1){
+      activeSlide = 0;
+      navButtons[0].classList.add("active-slide");
+    }
+  }
 }
-
 runCarousel();
-// getBoundingClientRect().width

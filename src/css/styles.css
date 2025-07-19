@@ -2,97 +2,94 @@
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
 }
 
-.carousel {
+.carousel{
   position: relative;
-  width: 60vw;
+  width: 70%;
   height: 60vh;
+  border: 20px solid transparent;
+  border-image: url(../assets/images/frame.jpg) 30% round;
   margin-inline: auto;
-  margin-block-start: 5vh;
+  margin-block-start: 10vh;
+  overflow: hidden;
 }
 
-.carousel-slide {
-  position: absolute;
+.slides-container{
   width: 100%;
   height: 100%;
+  position: absolute;
 }
-
-.carousel-slide img {
+.slide{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.slide img{
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
 
-.carousel-button,
-.carousel-nav {
+.carousel-nav{
   position: absolute;
-  z-index: 2;
-}
-
-.carousel-button {
-  top: 50%;
-  font-size: 3rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-50%);
-  cursor: pointer;
-  border-radius: 10px;
-  border: none;
-}
-
-.carousel-button:hover,
-.carousel-button:focus {
-  background-color: rgba(0, 0, 0, 0.25);
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.carousel-button:focus {
-  border: 1px black solid;
-}
-
-.carousel-button--prev {
-  left: 2rem;
-}
-
-.carousel-button--next {
-  right: 2rem;
-}
-
-/* .slides-container{
-  position: absolute;
-} */
-.carousel-nav {
-  bottom: 1rem;
   width: fit-content;
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  bottom: 2%;
   left: 50%;
   transform: translateX(-50%);
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 239, 213,0.2);
+  z-index: 2;
   border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-.carousel-nav:hover {
-  background-color: rgba(0, 0, 0, 0.25);
-}
-
-.carousel-nav-button {
-  height: 1rem;
-  width: 1rem;
+.carousel-nav-button{
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-  border: none;
+  background-color: rgba(255,255,255,.5);
   cursor: pointer;
 }
 
-.carousel-nav-button.active-slide {
-  background-color: rgba(255, 255, 255, 0.8);
+.carousel-nav-button:hover{
+  background-color: rgba(255,255,255,0.7);
+}
+
+.carousel-nav-button.active-slide{
+  background-color: rgba(230, 115, 134,0.8);
+}
+
+.carousel-nav-button.active-slide:hover{
+  background-color:rgba(230, 115, 134,1);
+}
+
+.carousel-button{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 239, 213,0.2);
+  color: white;
+  opacity: 0.5;
+  font-size: 3rem;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+
+.carousel-button:hover{
+  opacity: 1;
+}
+
+.carousel-button--prev{
+  left: 2%;
+}
+
+.carousel-button--next{
+  right: 2%;
 }
