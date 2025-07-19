@@ -1,5 +1,4 @@
 function runCarousel() {
-  // const carousel = document.querySelector(".carousel");
   const slidesContainer = document.querySelector(".slides-container");
   const carouselNav = document.querySelector(".carousel-nav");
   const carouselButtonPrev = document.querySelector(".carousel-button--prev");
@@ -24,9 +23,6 @@ function runCarousel() {
     navBtn = document.createElement("button");
     navBtn.innerText = i;
     navBtn.classList.add("carousel-nav-button");
-    // if (i === 0 || i === allSlides.length - 1) {
-    //   navBtn.display.style = "none";
-    // }
     carouselNav.appendChild(navBtn);
     navBtn = null;
   }
@@ -46,7 +42,9 @@ function runCarousel() {
     }
     updateCarousel();
   });
+
   //Auto loop slide
+
   slidesContainer.addEventListener("mouseleave", () => {
     isHoveringSlide=false;
   });
@@ -95,7 +93,6 @@ function runCarousel() {
       slidesContainer.style.transition = "none";
       slidesContainer.style.transform =
         "translateX(-" + activeSlide * imageWidth + "px)";
-      //slidesContainer.style.transition = "transform 0.5s ease-in-out";
     } else if (activeSlide === allSlides.length - 1) {
       navButtons[activeSlide].classList.remove("active-slide");
       activeSlide = 1;
@@ -103,7 +100,6 @@ function runCarousel() {
       slidesContainer.style.transition = "none";
       slidesContainer.style.transform =
         "translateX(-" + activeSlide * imageWidth + "px)";
-      //slidesContainer.style.transition = "transform 0.5s ease-in-out";
     }
   }
 }
