@@ -33,6 +33,9 @@ function runCarousel() {
   carouselButtonNext.addEventListener("click", nextSlide);
   carouselButtonPrev.addEventListener("click", previousSlide);
   carouselNav.addEventListener("click", (e) => {
+    if(e.target.tagName !== "BUTTON"){
+      return;
+    }
     let clickedButton = e.target.closest("button");
     for (let i = 1; i < navButtons.length - 1; i++) {
       if (navButtons[i] === clickedButton) {
